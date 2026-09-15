@@ -1,13 +1,13 @@
 const bannerSets = {
     left: [
-        { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#1d73d2', accent: '#dfeeff', external: true },
-        { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#f75cb3', accent: '#fff0a8', external: true },
-        { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#1b6d9e', accent: '#d7f3ff', external: false }
+        { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#91b7d8', accent: '#edf5fb', external: true },
+        { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#dfa5c0', accent: '#fff4d6', external: true },
+        { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#82aebf', accent: '#eaf6fa', external: false }
     ],
     right: [
-        { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d62828', accent: '#ffd9d9', external: true },
-        { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#2d7d46', accent: '#e4ffe8', external: true },
-        { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#ff8c42', accent: '#fff2df', external: true }
+        { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d99595', accent: '#fff0f0', external: true },
+        { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true },
+        { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#e4b28c', accent: '#fff6eb', external: true }
     ]
 };
 

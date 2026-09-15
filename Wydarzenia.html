@@ -6,25 +6,33 @@
     <link rel="stylesheet" href="mainCSS.css">
     <title>Fundacja Idziemy Razem</title>
 </head>
-<body>
+<body class="events-page-body">
     <div class="topnav">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-label">☰</label>
-        <a  href="index.html">FUNDACJA IDZIEMY RAZEM</a>
-        <div class="nav-links">
-            <a href="ONas.html">O Nas</a>
-            <a class="active" href="Wydarzenia.html">Wydarzenia</a>
-            <a href="Kontakt.html#wspolpraca">Współpraca</a>
-            <a href="Kontakt.html#wsparcie">Wesprzyj nas</a>
-            <a href="Kontakt.html#kontakt">Kontakt</a>
+        <div class="nav-logo" aria-label="Logo Fundacji">LOGO</div>
+        <div class="nav-main">
+            <a href="index.html">FUNDACJA IDZIEMY RAZEM</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="ONas.html">O Nas</a>
+                <a class="active" href="Wydarzenia.html">Wydarzenia</a>
+                <a href="Kontakt.html#wspolpraca">Współpraca</a>
+                <a href="Kontakt.html#wsparcie">Wesprzyj nas</a>
+                <a href="Kontakt.html#kontakt">Kontakt</a>
+            </div>
         </div>
     </div>
 
     <div class="main events-page">
-        <div class="event-slider-shell">
-            <aside class="side-banner-column side-banner-column-left" aria-label="Banery po lewej stronie"></aside>
+        <div class="events-layout">
+            <div class="banner-scroll-container">
+                <aside class="side-banner-column side-banner-column-left" aria-label="Banery po lewej stronie"></aside>
+                <aside class="side-banner-column side-banner-column-right" aria-label="Banery po prawej stronie"></aside>
+            </div>
 
-            <div class="event-slider">
+            <div class="event-slider-shell">
+                <div class="event-slider">
                 <div class="event-header">
                     <button class="nav-arrow" id="prevEvent" aria-label="Poprzednie wydarzenie">&#8249;</button>
                     <h2 id="eventTitle">Festiwal Most Kultury</h2>
@@ -52,9 +60,21 @@
                         <p>Dzięki Krzysztof Nesterowicz za zdjęcia!📸🔥</p>
                     </div>
                 </article>
-            </div>
 
-            <aside class="side-banner-column side-banner-column-right" aria-label="Banery po prawej stronie"></aside>
+                <div class="event-actions">
+                    <button class="event-action-button" id="nextEventBottom" type="button">Następne wydarzenie</button>
+                    <button class="event-action-button" id="toggleEvents" type="button" aria-expanded="false" aria-controls="allEventsList">Wszystkie wydarzenia</button>
+                </div>
+
+                <div class="events-modal" id="allEventsList" hidden>
+                    <div class="events-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventsModalTitle">
+                        <button class="events-modal-close" id="closeEventsModal" type="button" aria-label="Zamknij listę wydarzeń">&times;</button>
+                        <h3 id="eventsModalTitle">Wszystkie wydarzenia</h3>
+                        <div id="eventListItems"></div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -68,34 +88,64 @@
                     <p>Są takie miejsca, wydarzenia i spotkania, po których wraca się do domu z poczuciem, że wydarzyło się coś naprawdę ważnego. Dla Fundacji Idziemy Razem tegoroczny Most Kultury Festiwal 2026 w Głuchołazach był właśnie takim czasem 💚💛❤️</p>
                     <div class="event-inline-image">zdjęcie</div>
                     <p>Chcemy z całego serca podziękować organizatorom Festiwalu za niezwykle ciepłe przyjęcie, gościnność, otwartość i wspaniałą współpracę. Od pierwszych chwil czuliśmy, że jesteśmy w miejscu tworzonym przez ludzi, dla których słowa takie jak wspólnota, kultura, szacunek i wzajemna pomoc naprawdę coś znaczą 🤝💪</p>
+                    <p>Szczególne podziękowania kierujemy do Marcin Sznajder – za zaufanie, otwarte drzwi i możliwość obecności naszej Fundacji podczas tego wyjątkowego wydarzenia 🤝❤️</p>
+                    <p>Ogromne podziękowania należą się również do Wojtek Miszewski ze Stowarzyszenia Rolki Reggae Rajd, którego pomoc, zaangażowanie i współpraca miały dla nas ogromne znaczenie 🫡</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>To jednak nie wszystko! 📢 Szczególne miejsce w historii naszej Fundacji zajmuje człowiek, od którego w pewnym sensie wszystko się zaczęło. Chris Salewicz to wybitny brytyjski dziennikarz, pisarz i autor książki „Bob Marley – nieopowiedziana historia króla reggae”, a przede wszystkim honorowy patron pierwszej akcji charytatywnej „Idziemy Razem”.</p>
+                    <p>Dziękujemy Wam za wsparcie związane z pojawieniem się Fundacji na Festiwalu, współorganizację wyjątkowego spotkania z Chrisem Salewiczem, a także pomoc przy organizacji naszych warsztatów języka migowego 👌👐</p>
+                    <p>Warsztaty mogły odbyć się na polu namiotowym Siedlisko nad Białką, dlatego osobne podziękowania kierujemy również do jego właścicieli – za udostępnienie nam przestrzeni i możliwość przeprowadzenia zajęć właśnie tam 🏞❤️</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Chris opowiadał o tamtych czasach, o swoich spotkaniach, wspomnieniach i doświadczeniach związanych z Królem Reggae. Dla nas możliwość współorganizowania tego spotkania była czymś naprawdę wyjątkowym. Podczas pobytu w Głuchołazach Chris wielokrotnie mówił nam również, jak bardzo podoba mu się Most Kultury Festiwal – miejsce, w którym się odbywa, jego atmosfera, ludzie i oczywiście muzyka.</p>
-                    <p>Idziemy Razem 💚💛❤️ Na sam koniec chcemy podziękować wszystkim Wam, którzy podczas Festiwalu zatrzymaliście się przy naszym stoisku. Dziękujemy za każde dobre słowo, wsparcie finansowe, uśmiech i aktywność na rzecz naszej Fundacji. To właśnie dzięki Wam można robić więcej i wspólnie budować dobry świat.</p>
+                    <p>To jednak nie wszystko! 📢 Szczególne miejsce w historii naszej Fundacji zajmuje człowiek, od którego w pewnym sensie wszystko się zaczęło.</p>
+                    <p><strong>Chris Salewicz</strong> – wybitny brytyjski dziennikarz, pisarz i autor książki „Bob Marley – nieopowiedziana historia króla reggae”, a przede wszystkim honorowy patron pierwszej akcji charytatywnej „Idziemy Razem”, z której później narodziła się nasza Fundacja.</p>
+                    <p>To właśnie Chris początkiem 2025 roku, jako pierwszy, złożył swój podpis w swojej książce. Od tamtej chwili egzemplarz ten wędruje z rąk do rąk, zbierając kolejne niezwykle cenne autografy ludzi związanych z muzyką, kulturą i nie tylko. Wszystko po to, aby pewnego dnia zostać wystawionym na finałową licytację i zrobić coś dobrego dla drugiego człowieka.</p>
+                    <p>Kiedy zaprosiliśmy Chrisa na Most Kultury Festiwal 2026, przyjął nasze zaproszenie. Dzięki temu mieliśmy ogromny zaszczyt gościć go przez kilka dni w Polsce, a uczestnicy Festiwalu mogli wziąć udział w wyjątkowym spotkaniu z człowiekiem, który przez część swojego życia znajdował się niezwykle blisko Boba Marleya i jego świata.</p>
+                    <div class="event-inline-image">zdjęcie</div>
+                    <p>Chris opowiadał o tamtych czasach, o swoich spotkaniach, wspomnieniach i doświadczeniach związanych z Królem Reggae. Dla nas możliwość współorganizowania tego spotkania była czymś naprawdę wyjątkowym.</p>
+                    <p>Podczas pobytu w Głuchołazach Chris wielokrotnie mówił nam również, jak bardzo podoba mu się Most Kultury Festiwal – miejsce, w którym się odbywa, jego atmosfera, ludzie i oczywiście muzyka. Dało się po prostu poczuć, że ten festiwal zrobił na nim ogromne wrażenie.</p>
+                    <p>Ale dla nas wydarzyło się coś jeszcze ważniejszego. Chris zaczął nazywać nas swoimi przyjaciółmi. Dał nam również do zrozumienia, że wierzy w to, co robimy jako Fundacja, i że podoba mu się kierunek, który obraliśmy. To dla nas ogromny zaszczyt. I jednocześnie potężna dawka dobrej energii, aby iść dalej. Bo przecież właśnie o to chodzi.</p>
+                    <p><strong>Idziemy Razem 💚💛❤️</strong></p>
+                    <p>Na sam koniec chcemy podziękować wszystkim Wam, którzy podczas Festiwalu zatrzymaliście się przy naszym stoisku. Najmłodszym, którzy zostawili nam przepiękne, wyjątkowe kolorowanki ❤️ Dorosłym, którzy chcieli dowiedzieć się więcej o naszej działalności. Ludziom, którzy po prostu podeszli, porozmawiali z nami albo uścisnęli nam dłoń i powiedzieli kilka dobrych słów.</p>
+                    <div class="event-inline-image">zdjęcie</div>
+                    <p>Czasami właśnie taki zwykły gest daje człowiekowi najmocniejszy sygnał: „To, co robicie, ma sens. Róbcie to dalej.”</p>
+                    <p>Dziękujemy wszystkim, którzy wsparli nas również finansowo – kupując nasze bransoletki i koszulki, wrzucając datek czy dokonując zupełnie bezinteresownej wpłaty na rzecz Fundacji. Każda złotówka, każde dobre słowo, każda rozmowa, każdy uśmiech i każdy uścisk dłoni są częścią tego, co wspólnie budujemy.</p>
+                    <p>Most Kultury Festiwal – dziękujemy za gościnę.<br>Marcin – dziękujemy za ogromną pomoc.<br>Wojtek – dziękujemy za ciągłe wsparcie.<br>Siedlisko nad Białką – dziękujemy za otwartość.<br>Chris – dziękujemy za przyjaźń, zaufanie i za to, że od samego początku jesteś częścią tej historii.</p>
+                    <p>A Wam wszystkim – dziękujemy, że jesteście z nami ❤️ Działamy dalej z głowami pełnymi wspomnień, sercami pełnymi dobrej energii i jeszcze większym przekonaniem, że warto działać. Bo wielkie rzeczy bardzo często zaczynają się od małych gestów. I najlepiej robi się je razem. ❤️</p>
                     <p>Dzięki Krzysztof Nesterowicz za zdjęcia!📸🔥</p>
                 `
             },
             {
                 title: 'Warsztaty języka migowego',
                 content: `
-                    <p>Podczas warsztatów języka migowego uczestnicy mieli okazję poznać podstawy komunikacji bez używania słów, w przyjaznej i wspierającej atmosferze. Zajęcia były prowadzone przez doświadczonych instruktorów, którzy pokazali, jak ważne jest wzajemne zrozumienie i szacunek wobec osób korzystających z komunikacji migowej.</p>
+                    <p><strong>WARSZTATY JĘZYKA MIGOWEGO – MOST KULTURY 2026 🤍🖐️</strong></p>
+                    <p>15 sierpnia 2026 roku, podczas Festiwalu Most Kultury w malowniczym miejscu Siedlisko nad Białką w Głuchołazach, Fundacja Idziemy Razem, reprezentowana przez naszą Marysię, poprowadziła wyjątkowe warsztaty z języka migowego.</p>
+                    <p>Dziś chcemy wrócić do tych chwil i przedstawić Wam je w formie fotorelacji. 📸❤️</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>W programie znalazły się ćwiczenia praktyczne, prezentacje podstawowych gestów oraz rozmowy o codziennych sytuacjach, w których komunikacja bez słów może być niezwykle skuteczna. Wspólna nauka miała na celu zarówno rozwijanie umiejętności, jak i budowanie świadomości społecznej.</p>
+                    <p>Podczas warsztatów uczestnicy:</p>
+                    <p>👉 poznali podstawowe „magiczne słowa” oraz alfabet palcowy,<br>👉 dowiedzieli się więcej o codziennym życiu i wyzwaniach osób z wadą słuchu,<br>👉 wzięli udział w eksperymencie z użyciem zatyczek do uszu, dzięki któremu mogli choć przez chwilę doświadczyć ograniczeń związanych z ubytkiem słuchu,<br>👉 podjęli wyzwanie komunikowania się za pomocą alfabetu palcowego. 🤫🖐️</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Uczestnicy aktywnie włączali się do ćwiczeń, zadawali pytania i wymieniali się doświadczeniami. Dla wielu osób warsztaty okazały się ważnym krokiem do lepszego zrozumienia języka migowego i większej wrażliwości na potrzeby innych.</p>
-                    <p>Wydarzenie miało charakter edukacyjny i integracyjny, a jego celem była nie tylko nauka, ale też budowanie relacji i otwartości między ludźmi.</p>
+                    <p>Do nauki wykorzystaliśmy specjalne karty oraz kreatywne kolorowanki z alfabetem migowym. Rozmawialiśmy również o tym, jak właściwie podejść do osoby niedosłyszącej i jak skutecznie się z nią komunikować.</p>
+                    <p>To było niezwykle wartościowe spotkanie – pełne otwartości, zaangażowania, nauki, ale przede wszystkim empatii, zrozumienia i integracji.</p>
+                    <p>Dziękujemy wszystkim uczestnikom warsztatów oraz organizatorom za możliwość stworzenia wspólnie czegoś naprawdę ważnego. 🤍</p>
+                    <div class="event-inline-image">zdjęcie</div>
+                    <p>Bo czasem wystarczy nauczyć się kilku gestów, aby zmniejszyć dystans między ludźmi i pokazać, że każdy zasługuje na to, by zostać zauważonym, zrozumianym i usłyszanym – nawet wtedy, gdy świat komunikuje się bez słów.</p>
+                    <p>Fundacja Idziemy Razem<br>Łączymy serca. Zmieniamy życie, Bo Dobro zaczyna się od Razem. ❤️</p>
+                    <p>Foto: Krzysztof Nesterowicz</p>
                 `
             },
             {
-                title: 'Akcja „Razem dla dzieci”',
+                title: 'Chris Salewicz',
                 content: `
-                    <p>W ramach akcji „Razem dla dzieci” zorganizowaliśmy wspólne wydarzenie pełne zabawy, emocji i pozytywnego zaangażowania. Dzieci miały okazję uczestniczyć w kreatywnych aktywnościach, grach terenowych i warsztatach, które miały na celu zapewnienie im radości oraz chwili odpoczynku od codziennych obowiązków.</p>
+                    <p>Hola Załogo Idziemy Razem!❤️🤗💚</p>
+                    <p>Nie wiemy, jak Wy, ale my jesteśmy jeszcze niesieni festiwalowymi emocjami 🥳 po Most Kultury 2026 🌉🌍🌁 i tak z radością przypominamy nasze spotkanie z pisarzem Chrisem Salewiczem podczas tejże edycji. Łapcie zdjęcia [autor], a kto nie był, może żałować! 😊</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Fundacja przygotowała również strefę wsparcia dla rodzin, które w trudniejszych momentach potrzebują poczucia bezpieczeństwa i wspólnoty. Uczestnicy mogli porozmawiać z wolontariuszami, uzyskać informacje o dostępnych formach pomocy oraz dowiedzieć się, jak można angażować się w działania na rzecz lokalnej społeczności.</p>
+                    <p>Nowo zapoznanym od razu przypominamy 😇😎 dumnie, że Chris, autor biografii Boba Marleya pt. „Bob Marley: Nieopowiedziana historia króla reggae” przyjął bez zwłoki Patronat Honorowy nad naszą wspólną akcją pomocową już na samym jej początku, w 2025 i cieszymy się niezmiernie, że przyjął nasze zaproszenie do Polski ❤️🤗💚</p>
+                    <p>Zaczął cytatem Chrisa Blackwella (Island Records) o fenomenalnym głosie Boba Marleya, który przebija się wyraziście przez inne instrumenty, nawet w podobnych rejestrach. Opowiadał o swoim osobistym spotkaniu z Bobem i jego zaangażowaniu w sprawy społeczne, a także o swym głębokim doświadczeniu Jamajki, na przestrzeni czasu „wyspy źródeł” i krainy magii „obeah”, a zarazem teatru krwawej przemocy gangów powiązanych z głównymi partiami politycznymi.</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Akcja nie tylko dostarczyła radości uczestnikom, ale również pokazała, że wspólne działania mogą przynosić realne korzyści. Dzięki zaangażowaniu wielu osób udało się stworzyć przyjazną przestrzeń dla dzieci i ich rodzin.</p>
-                    <p>To wydarzenie było dowodem na to, że małe gesty i wspólna praca potrafią zmieniać codzienność wielu osób na lepsze.</p>
+                    <p>Ale wróćmy do muzyki. Chris nie jest osamotniony, utrzymując, że album Legend był krytycznym punktem zwrotnym w międzynarodowej karierze najbardziej rozpoznawalnej ikony muzyki i kultury reggae, i na nim właśnie skupił następnie sporą część swojej pogadanki (Chris zabronił nam używać słowa „wykład”).</p>
+                    <p>Publika w sali Hotel Sudety dopisała i – jak mamy nadzieję – dobrze się bawiła podczas pytań do autora (bardzo ciekawe! 🤓) i podpisów z dedykacją w książkach.</p>
+                    <p>Nasza wspólna akcja trwa i ciągle powiększa zasięg, czego dowodem jest Chris – obecnie na Jamajce – w koszulce Idziemy Razem! 💚😃❤️ I pozdrawia Was serdecznie!</p>
+                    <p>Dziękujemy Wam wszystkim, Kochani, dziękujemy bardzo raz jeszcze:<br>Chrisowi za przybycie.<br>Organizatorom za wspaniałe przyjęcie.<br>I Wam, festiwalowi tubylcy, za wszelką pomoc i wsparcie.<br>❤️🤗💚</p>
+                    <p>Polecamy się! Udostępniajcie i polecajcie wszystkim znajomym. Każde wsparcie się liczy.<br>Idziemy Razem<br>One Love ❤️💛💚</p>
+                    <p>Foto: Krzysztof Nesterowicz</p>
                 `
             }
         ];
@@ -103,33 +153,98 @@
         let currentEventIndex = 0;
         const eventTitle = document.getElementById('eventTitle');
         const eventContent = document.getElementById('eventContent');
+        const eventCard = document.querySelector('.single-event-card');
+        const bannerScrollContainer = document.querySelector('.banner-scroll-container');
+
+        function syncBannerContainerHeight() {
+            if (!eventCard || !bannerScrollContainer || window.innerWidth <= 900) {
+                if (bannerScrollContainer) bannerScrollContainer.style.height = '';
+                return;
+            }
+
+            bannerScrollContainer.style.height = `${eventCard.offsetHeight}px`;
+        }
 
         function renderEvent(index) {
             const event = events[index];
             eventTitle.textContent = event.title;
             eventContent.innerHTML = event.content;
+            requestAnimationFrame(syncBannerContainerHeight);
+        }
+
+        renderEvent(0);
+        syncBannerContainerHeight();
+        window.addEventListener('resize', syncBannerContainerHeight);
+
+        function scrollToEventsTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         document.getElementById('prevEvent').addEventListener('click', () => {
             currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
             renderEvent(currentEventIndex);
+            scrollToEventsTop();
         });
 
         document.getElementById('nextEvent').addEventListener('click', () => {
             currentEventIndex = (currentEventIndex + 1) % events.length;
             renderEvent(currentEventIndex);
+            scrollToEventsTop();
+        });
+
+        document.getElementById('nextEventBottom').addEventListener('click', () => {
+            currentEventIndex = (currentEventIndex + 1) % events.length;
+            renderEvent(currentEventIndex);
+            scrollToEventsTop();
+        });
+
+        const toggleEvents = document.getElementById('toggleEvents');
+        const allEventsList = document.getElementById('allEventsList');
+        const eventListItems = document.getElementById('eventListItems');
+        events.forEach((event, index) => {
+            const eventButton = document.createElement('button');
+            eventButton.type = 'button';
+            eventButton.className = 'event-list-item';
+            eventButton.textContent = event.title;
+            eventButton.addEventListener('click', () => {
+                currentEventIndex = index;
+                renderEvent(currentEventIndex);
+                closeEventsModal();
+                scrollToEventsTop();
+            });
+            eventListItems.appendChild(eventButton);
+        });
+
+        toggleEvents.addEventListener('click', () => {
+            allEventsList.hidden = false;
+            toggleEvents.setAttribute('aria-expanded', 'true');
+            document.body.classList.add('modal-open');
+        });
+
+        const closeEventsModal = () => {
+            allEventsList.hidden = true;
+            toggleEvents.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('modal-open');
+        };
+
+        document.getElementById('closeEventsModal').addEventListener('click', closeEventsModal);
+        allEventsList.addEventListener('click', (event) => {
+            if (event.target === allEventsList) closeEventsModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !allEventsList.hidden) closeEventsModal();
         });
 
         const bannerSets = {
             left: [
-                { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#1d73d2', accent: '#dfeeff', external: true },
-                { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#f75cb3', accent: '#fff0a8', external: true },
-                { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#1b6d9e', accent: '#d7f3ff', external: false }
+                { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#91b7d8', accent: '#edf5fb', external: true },
+                { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#dfa5c0', accent: '#fff4d6', external: true },
+                { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#82aebf', accent: '#eaf6fa', external: false }
             ],
             right: [
-                { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d62828', accent: '#ffd9d9', external: true },
-                { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#2d7d46', accent: '#e4ffe8', external: true },
-                { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#ff8c42', accent: '#fff2df', external: true }
+                { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d99595', accent: '#fff0f0', external: true },
+                { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true },
+                { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#e4b28c', accent: '#fff6eb', external: true }
             ]
         };
 
@@ -196,8 +311,8 @@
             <div class="footer-column">
                 <h3>Kontakt</h3>
                 <ul>
-                    <li><a href="tel:+48123456789">+48 123 456 789</a></li>
-                    <li><a href="mailto:kontakt@fundacja.pl">kontakt@fundacja.pl</a></li>
+                    <li><a href="tel:+48666907151">+48 666 907 151</a></li>
+                    <li><a href="mailto:idziemyrazem2025@gmail.com">idziemyrazem2025@gmail.com</a></li>
                     <li><a href="Kontakt.html">Formularz kontaktowy</a></li>
                 </ul>
             </div>
