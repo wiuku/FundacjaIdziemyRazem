@@ -1,13 +1,11 @@
 const bannerSets = {
     left: [
-        { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#91b7d8', accent: '#edf5fb', external: true },
-        { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#dfa5c0', accent: '#fff4d6', external: true },
-        { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#82aebf', accent: '#eaf6fa', external: false }
+        { label: 'Dołącz do naszej społeczności', title: 'Facebook', logo: 'IMG/LG/LG_fb.png', qr: 'IMG/QRFB.png', href: 'https://www.facebook.com/profile.php?id=61572712465973', bg: '#91b7d8', accent: '#edf5fb', external: true },
+        { label: 'Obejrzyj nasze historie', title: 'Instagram', logo: 'IMG/LG/LG_ig.png', qr: 'IMG/QRIG.png', href: 'https://www.instagram.com/idziemyrazem2026/', bg: '#dfa5c0', accent: '#fff4d6', external: true }
     ],
     right: [
-        { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d99595', accent: '#fff0f0', external: true },
-        { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true },
-        { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#e4b28c', accent: '#fff6eb', external: true }
+        { label: 'Zostań naszym Patronem', title: 'Patronite', logo: 'IMG/LG/LG_patronite.png', qr: 'IMG/QRPatronite.png', href: 'https://patronite.pl/', bg: '#d99595', accent: '#fff0f0', external: true },
+        { label: 'Podziel się dobrem', title: 'Pomagam.pl', logo: 'IMG/LG/LG_pomagam.png', qr: 'IMG/QRPomagam.png', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true }
     ]
 };
 
@@ -25,8 +23,10 @@ function createBannerItem(banner) {
     link.target = banner.external ? '_blank' : '_self';
     link.rel = banner.external ? 'noopener noreferrer' : '';
     link.innerHTML = `
+        ${banner.logo ? `<img class="banner-logo" src="${banner.logo}" alt="Logo ${banner.title}">` : ''}
         <span class="banner-kicker">${banner.label}</span>
         <span class="banner-title">${banner.title}</span>
+        ${banner.qr ? `<img class="banner-qr" src="${banner.qr}" alt="Kod QR: ${banner.title}">` : ''}
     `;
     return link;
 }

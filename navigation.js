@@ -43,7 +43,9 @@ function updateContactActiveLink() {
         }
     });
 
-    const activeLink = navigationLinks.find((link) => link.hash === `#${currentSection.id}`);
+    const activeLink = currentSection.id === 'wspolpraca'
+        ? navigationLinks.find((link) => getPageName(link) === currentPage && !link.hash)
+        : navigationLinks.find((link) => link.hash === `#${currentSection.id}`);
     setActiveLink(activeLink);
 }
 

@@ -10,14 +10,14 @@
     <div class="topnav">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-label">☰</label>
-        <div class="nav-logo" aria-label="Logo Fundacji">LOGO</div>
+        <div class="nav-logo" aria-label="Logo Fundacji"><img src="IMG/LOGO.jpg" alt="Logo Fundacji"></div>
         <div class="nav-main">
             <a href="index.html">FUNDACJA IDZIEMY RAZEM</a>
             <div class="nav-links">
                 <a href="index.html">Home</a>
                 <a href="ONas.html">O Nas</a>
                 <a class="active" href="Wydarzenia.html">Wydarzenia</a>
-                <a href="Kontakt.html#wspolpraca">Współpraca</a>
+                <a href="Kontakt.html">Współpraca</a>
                 <a href="Kontakt.html#wsparcie">Wesprzyj nas</a>
                 <a href="Kontakt.html#kontakt">Kontakt</a>
             </div>
@@ -81,9 +81,45 @@
     <script src="navigation.js"></script>
 
     <script>
+        function eventPhoto(eventNumber, photoNumber) {
+            return `<figure class="event-photo"><img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="lazy"></figure>`;
+        }
+
+        function eventGallery(eventNumber, firstPhoto, photoCount) {
+            const photos = Array.from({ length: photoCount }, (_, index) => {
+                const photoNumber = firstPhoto + index;
+                return `<img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="lazy">`;
+            }).join('');
+
+            return `<div class="event-gallery" aria-label="Pozostałe zdjęcia z wydarzenia">${photos}</div>`;
+        }
+
+        function formatEventContent(event, eventNumber) {
+            const content = document.createElement('div');
+            content.innerHTML = event.content.replaceAll('<div class="event-inline-image">zdjęcie</div>', '');
+
+            const paragraphs = [...content.querySelectorAll('p')];
+            const inlinePhotoCount = Math.min(paragraphs.length, event.photoCount);
+
+            paragraphs.slice(0, inlinePhotoCount).forEach((paragraph, index) => {
+                paragraph.insertAdjacentHTML('afterend', eventPhoto(eventNumber, index + 1));
+            });
+
+            if (event.photoCount > inlinePhotoCount) {
+                content.insertAdjacentHTML('beforeend', eventGallery(
+                    eventNumber,
+                    inlinePhotoCount + 1,
+                    event.photoCount - inlinePhotoCount
+                ));
+            }
+
+            return content.innerHTML;
+        }
+
         const events = [
             {
                 title: 'Festiwal Most Kultury',
+                photoCount: 3,
                 content: `
                     <p>Są takie miejsca, wydarzenia i spotkania, po których wraca się do domu z poczuciem, że wydarzyło się coś naprawdę ważnego. Dla Fundacji Idziemy Razem tegoroczny Most Kultury Festiwal 2026 w Głuchołazach był właśnie takim czasem 💚💛❤️</p>
                     <div class="event-inline-image">zdjęcie</div>
@@ -114,6 +150,7 @@
             },
             {
                 title: 'Warsztaty języka migowego',
+                photoCount: 9,
                 content: `
                     <p><strong>WARSZTATY JĘZYKA MIGOWEGO – MOST KULTURY 2026 🤍🖐️</strong></p>
                     <p>15 sierpnia 2026 roku, podczas Festiwalu Most Kultury w malowniczym miejscu Siedlisko nad Białką w Głuchołazach, Fundacja Idziemy Razem, reprezentowana przez naszą Marysię, poprowadziła wyjątkowe warsztaty z języka migowego.</p>
@@ -133,6 +170,7 @@
             },
             {
                 title: 'Chris Salewicz',
+                photoCount: 16,
                 content: `
                     <p>Hola Załogo Idziemy Razem!❤️🤗💚</p>
                     <p>Nie wiemy, jak Wy, ale my jesteśmy jeszcze niesieni festiwalowymi emocjami 🥳 po Most Kultury 2026 🌉🌍🌁 i tak z radością przypominamy nasze spotkanie z pisarzem Chrisem Salewiczem podczas tejże edycji. Łapcie zdjęcia [autor], a kto nie był, może żałować! 😊</p>
@@ -168,7 +206,7 @@
         function renderEvent(index) {
             const event = events[index];
             eventTitle.textContent = event.title;
-            eventContent.innerHTML = event.content;
+            eventContent.innerHTML = formatEventContent(event, index + 1);
             requestAnimationFrame(syncBannerContainerHeight);
         }
 
@@ -237,14 +275,12 @@
 
         const bannerSets = {
             left: [
-                { label: 'Bądź na bieżąco', title: 'Facebook', href: 'https://www.facebook.com/', bg: '#91b7d8', accent: '#edf5fb', external: true },
-                { label: 'Bądź na bieżąco', title: 'Instagram', href: 'https://www.instagram.com/', bg: '#dfa5c0', accent: '#fff4d6', external: true },
-                { label: 'Dołącz do nas', title: 'Współpraca', href: 'Kontakt.html', bg: '#82aebf', accent: '#eaf6fa', external: false }
+                { label: 'Dołącz do naszej społeczności', title: 'Facebook', logo: 'IMG/LG/LG_fb.png', qr: 'IMG/QRFB.png', href: 'https://www.facebook.com/profile.php?id=61572712465973', bg: '#91b7d8', accent: '#edf5fb', external: true },
+                { label: 'Obejrzyj nasze historie', title: 'Instagram', logo: 'IMG/LG/LG_ig.png', qr: 'IMG/QRIG.png', href: 'https://www.instagram.com/idziemyrazem2026/', bg: '#dfa5c0', accent: '#fff4d6', external: true }
             ],
             right: [
-                { label: 'Pomóż razem z nami', title: 'Patronite', href: 'https://patreon.com/', bg: '#d99595', accent: '#fff0f0', external: true },
-                { label: 'Pomagam.pl', title: 'Wesprzyj', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true },
-                { label: '4fund', title: 'Wpłać', href: 'https://4fund.com/', bg: '#e4b28c', accent: '#fff6eb', external: true }
+                { label: 'Zostań naszym Patronem', title: 'Patronite', logo: 'IMG/LG/LG_patronite.png', qr: 'IMG/QRPatronite.png', href: 'https://patreon.com/', bg: '#d99595', accent: '#fff0f0', external: true },
+                { label: 'Podziel się dobrem', title: 'Pomagam.pl', logo: 'IMG/LG/LG_pomagam.png', qr: 'IMG/QRPomagam.png', href: 'https://pomagam.pl/', bg: '#9fbea6', accent: '#f0faf2', external: true }
             ]
         };
 
@@ -262,8 +298,10 @@
             link.target = banner.external ? '_blank' : '_self';
             link.rel = banner.external ? 'noopener noreferrer' : '';
             link.innerHTML = `
+                ${banner.logo ? `<img class="banner-logo" src="${banner.logo}" alt="Logo ${banner.title}">` : ''}
                 <span class="banner-kicker">${banner.label}</span>
                 <span class="banner-title">${banner.title}</span>
+                ${banner.qr ? `<img class="banner-qr" src="${banner.qr}" alt="Kod QR: ${banner.title}">` : ''}
             `;
             return link;
         }
@@ -320,9 +358,9 @@
             <div class="footer-column">
                 <h3>Media społecznościowe</h3>
                 <ul>
-                    <li><a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a></li>
-                    <li><a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a></li>
-                    <li><a href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=61572712465973" target="_blank" rel="noreferrer">Facebook</a></li>
+                    <li><a href="https://www.instagram.com/idziemyrazem2026/" target="_blank" rel="noreferrer">Instagram</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=g_ITNTy1v6o" target="_blank" rel="noreferrer">YouTube</a></li>
                 </ul>
             </div>
         </div>
