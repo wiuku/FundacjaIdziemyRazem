@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <div class="topnav">
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
         <label for="nav-toggle" class="nav-toggle-label">☰</label>
-        <div class="nav-logo" aria-label="Logo Fundacji"><img src="IMG/LOGO.jpg" alt="Logo Fundacji"></div>
+        <a class="nav-logo" href="index.html" aria-label="Strona główna - Fundacja Idziemy Razem"><img src="IMG/LOGO.jpg" alt="Logo Fundacji"></a>
         <div class="nav-main">
             <a href="index.html">FUNDACJA IDZIEMY RAZEM</a>
             <div class="nav-links">
@@ -73,7 +73,21 @@
                         <div id="eventListItems"></div>
                     </div>
                 </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="event-gallery-modal" id="eventGalleryModal" hidden>
+        <div class="event-gallery-modal-panel" role="dialog" aria-modal="true" aria-labelledby="eventGalleryTitle">
+            <button class="events-modal-close" id="closeEventGallery" type="button" aria-label="Zamknij galerię">&times;</button>
+            <h3 id="eventGalleryTitle"></h3>
+            <div class="event-gallery-viewer" id="eventGalleryViewer"></div>
+            <div class="event-gallery-controls">
+                <button class="event-gallery-arrow" id="previousGalleryPhoto" type="button" aria-label="Poprzednie zdjęcie">&#8249;</button>
+                <span id="eventGalleryCounter" aria-live="polite"></span>
+                <button class="event-gallery-arrow" id="nextGalleryPhoto" type="button" aria-label="Następne zdjęcie">&#8250;</button>
             </div>
         </div>
     </div>
@@ -81,17 +95,28 @@
     <script src="navigation.js"></script>
 
     <script>
-        function eventPhoto(eventNumber, photoNumber) {
-            return `<figure class="event-photo"><img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="lazy"></figure>`;
+        function eventPhoto(eventNumber, photoNumber, addGalleryButton) {
+            const galleryButton = addGalleryButton
+                ? '<button class="event-more-photos" type="button">Zobacz więcej zdjęć z wydarzenia</button>'
+                : '';
+            return `<figure class="event-photo"><img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="lazy">${galleryButton}</figure>`;
         }
 
-        function eventGallery(eventNumber, firstPhoto, photoCount) {
-            const photos = Array.from({ length: photoCount }, (_, index) => {
-                const photoNumber = firstPhoto + index;
-                return `<img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="lazy">`;
-            }).join('');
+        function inlinePhotoPositions(paragraphCount, photoCount) {
+            const inlineCount = Math.min(3, paragraphCount, photoCount);
+            const positions = new Set();
+            const candidates = [1, Math.floor((paragraphCount - 1) / 2), paragraphCount - 2]
+                .map((position) => Math.max(0, Math.min(paragraphCount - 1, position)));
 
-            return `<div class="event-gallery" aria-label="Pozostałe zdjęcia z wydarzenia">${photos}</div>`;
+            candidates.forEach((position) => {
+                if (positions.size < inlineCount) positions.add(position);
+            });
+
+            for (let position = 0; positions.size < inlineCount; position += 1) {
+                if (!positions.has(position)) positions.add(position);
+            }
+
+            return [...positions].sort((first, second) => first - second);
         }
 
         function formatEventContent(event, eventNumber) {
@@ -99,19 +124,16 @@
             content.innerHTML = event.content.replaceAll('<div class="event-inline-image">zdjęcie</div>', '');
 
             const paragraphs = [...content.querySelectorAll('p')];
-            const inlinePhotoCount = Math.min(paragraphs.length, event.photoCount);
+            const photoPositions = inlinePhotoPositions(paragraphs.length, event.photoCount);
+            const inlinePhotoNumbers = photoPositions.map((_, index) => index + 1);
 
-            paragraphs.slice(0, inlinePhotoCount).forEach((paragraph, index) => {
-                paragraph.insertAdjacentHTML('afterend', eventPhoto(eventNumber, index + 1));
+            photoPositions.forEach((paragraphIndex, index) => {
+                const hasMorePhotos = event.photoCount > inlinePhotoNumbers.length;
+                paragraphs[paragraphIndex].insertAdjacentHTML(
+                    'afterend',
+                    eventPhoto(eventNumber, inlinePhotoNumbers[index], hasMorePhotos && index === photoPositions.length - 1)
+                );
             });
-
-            if (event.photoCount > inlinePhotoCount) {
-                content.insertAdjacentHTML('beforeend', eventGallery(
-                    eventNumber,
-                    inlinePhotoCount + 1,
-                    event.photoCount - inlinePhotoCount
-                ));
-            }
 
             return content.innerHTML;
         }
@@ -152,20 +174,31 @@
                 title: 'Warsztaty języka migowego',
                 photoCount: 9,
                 content: `
-                    <p><strong>WARSZTATY JĘZYKA MIGOWEGO – MOST KULTURY 2026 🤍🖐️</strong></p>
-                    <p>15 sierpnia 2026 roku, podczas Festiwalu Most Kultury w malowniczym miejscu Siedlisko nad Białką w Głuchołazach, Fundacja Idziemy Razem, reprezentowana przez naszą Marysię, poprowadziła wyjątkowe warsztaty z języka migowego.</p>
-                    <p>Dziś chcemy wrócić do tych chwil i przedstawić Wam je w formie fotorelacji. 📸❤️</p>
+                    <p><strong>Warsztaty Języka Migowego na Festiwalu Most Kultury 2026 🤍🖐️</strong></p>
+                    <p>15 sierpnia 2026 roku podczas Festiwalu Most Kultury w ośrodku Siedlisko nad Białką w Głuchołazach odbyły się warsztaty z języka migowego. Zajęcia prowadziła reprezentantka Fundacji Idziemy Razem, Maria Nalewajczyk.</p>
+                    <p>Wydarzenie miało na celu integrację społeczną oraz popularyzację podstaw języka migowego w ramach działań edukacyjnych Fundacji. Poniżej prezentujemy fotorelację z przebiegu zajęć. 📸❤️</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Podczas warsztatów uczestnicy:</p>
-                    <p>👉 poznali podstawowe „magiczne słowa” oraz alfabet palcowy,<br>👉 dowiedzieli się więcej o codziennym życiu i wyzwaniach osób z wadą słuchu,<br>👉 wzięli udział w eksperymencie z użyciem zatyczek do uszu, dzięki któremu mogli choć przez chwilę doświadczyć ograniczeń związanych z ubytkiem słuchu,<br>👉 podjęli wyzwanie komunikowania się za pomocą alfabetu palcowego. 🤫🖐️</p>
+                    <section class="home-funds">
+                        <h3>Podczas zajęć edukacyjnych zorganizowanych w ramach festiwalu uczestnicy wzięli udział w części teoretycznej i praktycznej, obejmującej:</h3>
+                        <ul>
+                            <li>Zapoznanie się z podstawowymi zwrotami oraz alfabetem palcowym.</li>
+                            <li>Zdobycie wiedzy na temat codziennego funkcjonowania i wyzwań, z jakimi mierzą się osoby z wadą słuchu.</li>
+                            <li>Przeprowadzenie eksperymentu z wykorzystaniem zatyczek do uszu, umożliwiającego symulację ograniczeń związanych z ubytkiem słuchu.</li>
+                            <li>Podjęcie praktycznej próby komunikacji z użyciem alfabetu palcowego. 🤫🖐️</li>
+                        </ul>
+                    </section>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Do nauki wykorzystaliśmy specjalne karty oraz kreatywne kolorowanki z alfabetem migowym. Rozmawialiśmy również o tym, jak właściwie podejść do osoby niedosłyszącej i jak skutecznie się z nią komunikować.</p>
-                    <p>To było niezwykle wartościowe spotkanie – pełne otwartości, zaangażowania, nauki, ale przede wszystkim empatii, zrozumienia i integracji.</p>
-                    <p>Dziękujemy wszystkim uczestnikom warsztatów oraz organizatorom za możliwość stworzenia wspólnie czegoś naprawdę ważnego. 🤍</p>
+                    <p>W trakcie warsztatów wykorzystano materiały edukacyjne, w tym specjalne karty oraz kreatywne kolorowanki z alfabetem migowym. Program zajęć obejmował również omówienie zasad prawidłowego podejścia i skutecznej komunikacji z osobami niedosłyszącymi.</p>
+                    <p>Spotkanie miało charakter integracyjny i edukacyjny, sprzyjając poszerzaniu świadomości społecznej oraz rozwijaniu empatii i zrozumienia potrzeb osób z wadą słuchu.</p>
                     <div class="event-inline-image">zdjęcie</div>
-                    <p>Bo czasem wystarczy nauczyć się kilku gestów, aby zmniejszyć dystans między ludźmi i pokazać, że każdy zasługuje na to, by zostać zauważonym, zrozumianym i usłyszanym – nawet wtedy, gdy świat komunikuje się bez słów.</p>
-                    <p>Fundacja Idziemy Razem<br>Łączymy serca. Zmieniamy życie, Bo Dobro zaczyna się od Razem. ❤️</p>
-                    <p>Foto: Krzysztof Nesterowicz</p>
+                    <p>Nauka podstawowych gestów pozwala na zmniejszenie barier komunikacyjnych oraz sprzyja włączaniu społecznemu osób z niepełnosprawnościami. Inicjatywy podejmowane w tym obszarze przez Fundację Idziemy Razem wpisują się w stały cel organizacji, jakim jest budowanie przestrzeni opartej na zrozumieniu i empatii.</p>
+                    <p><b>Fundacja Idziemy Razem</b></p>
+                    <p>Łączymy serca. Zmieniamy życie. Bo Dobro zaczyna się od Razem. ❤️</p>
+
+                    
+                    
+                    
+                    <p>Autor zdjęć: Krzysztof Nesterowicz</p>
                 `
             },
             {
@@ -209,6 +242,96 @@
             eventContent.innerHTML = formatEventContent(event, index + 1);
             requestAnimationFrame(syncBannerContainerHeight);
         }
+
+        const eventGalleryModal = document.getElementById('eventGalleryModal');
+        const eventGalleryViewer = document.getElementById('eventGalleryViewer');
+        const eventGalleryTitle = document.getElementById('eventGalleryTitle');
+        const eventGalleryCounter = document.getElementById('eventGalleryCounter');
+        let currentGalleryPhoto = 0;
+        let galleryScrollFrame = 0;
+
+        function updateGalleryPhoto(index) {
+            const slides = [...eventGalleryViewer.querySelectorAll('.event-gallery-slide')];
+            if (!slides.length) return;
+
+            currentGalleryPhoto = (index + slides.length) % slides.length;
+            slides.forEach((slide, slideIndex) => {
+                slide.classList.toggle('active', slideIndex === currentGalleryPhoto);
+                slide.setAttribute('aria-hidden', String(slideIndex !== currentGalleryPhoto));
+            });
+            eventGalleryCounter.textContent = `${currentGalleryPhoto + 1} / ${slides.length}`;
+
+            if (window.matchMedia('(max-width: 700px)').matches) {
+                eventGalleryViewer.scrollTo({
+                    top: currentGalleryPhoto * eventGalleryViewer.clientHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        eventGalleryViewer.addEventListener('scroll', () => {
+            if (!window.matchMedia('(max-width: 700px)').matches || galleryScrollFrame) return;
+
+            galleryScrollFrame = requestAnimationFrame(() => {
+                galleryScrollFrame = 0;
+                const slides = [...eventGalleryViewer.querySelectorAll('.event-gallery-slide')];
+                if (!slides.length) return;
+
+                currentGalleryPhoto = Math.min(
+                    slides.length - 1,
+                    Math.round(eventGalleryViewer.scrollTop / eventGalleryViewer.clientHeight)
+                );
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === currentGalleryPhoto);
+                    slide.setAttribute('aria-hidden', String(index !== currentGalleryPhoto));
+                });
+                eventGalleryCounter.textContent = `${currentGalleryPhoto + 1} / ${slides.length}`;
+            });
+        });
+
+        function openEventGallery() {
+            const event = events[currentEventIndex];
+            const eventNumber = currentEventIndex + 1;
+            const paragraphs = document.createElement('div');
+            paragraphs.innerHTML = event.content.replaceAll('<div class="event-inline-image">zdjęcie</div>', '');
+            const inlinePhotoNumbers = new Set(inlinePhotoPositions(paragraphs.querySelectorAll('p').length, event.photoCount)
+                .map((_, index) => index + 1));
+            const remainingPhotoNumbers = Array.from({ length: event.photoCount }, (_, index) => index + 1)
+                .filter((photoNumber) => !inlinePhotoNumbers.has(photoNumber));
+
+            eventGalleryTitle.textContent = `Więcej zdjęć: ${event.title}`;
+            eventGalleryViewer.innerHTML = remainingPhotoNumbers.map((photoNumber, index) => `
+                <figure class="event-gallery-slide${index === 0 ? ' active' : ''}">
+                    <img src="IMG/W/W${eventNumber}.${photoNumber}.png" alt="Zdjęcie ${photoNumber} z wydarzenia ${eventNumber}" loading="${index === 0 ? 'eager' : 'lazy'}">
+                </figure>
+            `).join('');
+            eventGalleryViewer.scrollTop = 0;
+            eventGalleryModal.hidden = false;
+            document.body.classList.add('modal-open');
+            updateGalleryPhoto(0);
+        }
+
+        function closeEventGallery() {
+            eventGalleryModal.hidden = true;
+            document.body.classList.remove('modal-open');
+            eventGalleryViewer.innerHTML = '';
+        }
+
+        eventContent.addEventListener('click', (event) => {
+            if (event.target.closest('.event-more-photos')) openEventGallery();
+        });
+        document.getElementById('closeEventGallery').addEventListener('click', closeEventGallery);
+        eventGalleryModal.addEventListener('click', (event) => {
+            if (event.target === eventGalleryModal) closeEventGallery();
+        });
+        document.getElementById('previousGalleryPhoto').addEventListener('click', () => updateGalleryPhoto(currentGalleryPhoto - 1));
+        document.getElementById('nextGalleryPhoto').addEventListener('click', () => updateGalleryPhoto(currentGalleryPhoto + 1));
+        document.addEventListener('keydown', (event) => {
+            if (eventGalleryModal.hidden) return;
+            if (event.key === 'Escape') closeEventGallery();
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') updateGalleryPhoto(currentGalleryPhoto - 1);
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') updateGalleryPhoto(currentGalleryPhoto + 1);
+        });
 
         renderEvent(0);
         syncBannerContainerHeight();

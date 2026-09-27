@@ -61,7 +61,7 @@ navigationLinks.forEach((link) => {
 
 if (navigationToggle && navigationOverlay) {
     navigationOverlay.addEventListener('click', (event) => {
-        if (event.target === navigationOverlay) {
+        if (event.target.closest('a') || event.target === navigationOverlay) {
             navigationToggle.checked = false;
         }
     });
